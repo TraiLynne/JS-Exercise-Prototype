@@ -6,47 +6,47 @@ describe('fooFunction', ()=>{
     })
 });
 
-describe('Instances of Person', () => {
-    let neo
-    const foods = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    beforeEach(() => {
-      neo = new functions.Person('Neo', 20)
-    })
-    it('initialize with the given name', () => {
-      expect(neo.name).toBe('Neo')
-    })
-    it('initialize with the given age', () => {
-      expect(neo.age).toBe(20)
-    })
-    it('initialize with an empty stomach', () => {
-      expect(neo.stomach).toEqual([])
-      expect(neo.stomach.length).toBe(0)
-    })
-    it('get eat, poop and toString methods from their prototype', () => {
-      expect(neo.__proto__.eat).toBeDefined();
-      expect(neo.__proto__.poop).toBeDefined();
-      expect(neo.__proto__.toString).toBeDefined();
-    })
-    it('can eat up to 10 foods', () => {
-      foods.forEach(item => neo.eat(item))
-      foods.forEach(item => expect(neo.stomach).toContain(item))
-    })
-    it('can eat no more than 10 foods', () => {
-      foods.forEach(item => neo.eat(item))
-      neo.eat(11)
-      expect(neo.stomach).not.toBe(11)
-    })
-    it('can poop to empty stomach', () => {
-      foods.forEach(item => neo.eat(item))
-      neo.poop()
-      expect(neo.stomach.length).toEqual(0)
-    })
-    it('can state name and age', () => {
-      const str = neo.toString()
-      expect(str).toContain('Neo')
-      expect(str).toContain(20)
-    })
-  })
+// describe('Instances of Person', () => {
+//     let neo
+//     const foods = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+//     beforeEach(() => {
+//       neo = new functions.Person('Neo', 20)
+//     })
+//     it('initialize with the given name', () => {
+//       expect(neo.name).toBe('Neo')
+//     })
+//     it('initialize with the given age', () => {
+//       expect(neo.age).toBe(20)
+//     })
+//     it('initialize with an empty stomach', () => {
+//       expect(neo.stomach).toEqual([])
+//       expect(neo.stomach.length).toBe(0)
+//     })
+//     it('get eat, poop and toString methods from their prototype', () => {
+//       expect(neo.__proto__.eat).toBeDefined();
+//       expect(neo.__proto__.poop).toBeDefined();
+//       expect(neo.__proto__.toString).toBeDefined();
+//     })
+//     it('can eat up to 10 foods', () => {
+//       foods.forEach(item => neo.eat(item))
+//       foods.forEach(item => expect(neo.stomach).toContain(item))
+//     })
+//     it('can eat no more than 10 foods', () => {
+//       foods.forEach(item => neo.eat(item))
+//       neo.eat(11)
+//       expect(neo.stomach).not.toBe(11)
+//     })
+//     it('can poop to empty stomach', () => {
+//       foods.forEach(item => neo.eat(item))
+//       neo.poop()
+//       expect(neo.stomach.length).toEqual(0)
+//     })
+//     it('can state name and age', () => {
+//       const str = neo.toString()
+//       expect(str).toContain('Neo')
+//       expect(str).toContain(20)
+//     })
+//   })
   
   //car
   describe('Instances of Car', () => {
@@ -74,6 +74,30 @@ describe('Instances of Person', () => {
       expect(batmobile.tank).toEqual(10)
       batmobile.fill(10)
       expect(batmobile.tank).toEqual(20)
+    })
+
+    it('drive method will not allow travel if tank is empty', () => {
+      expect(batmobile.drive(20)).toMatch(`I ran out of fuel at ${batmobile.odometer} miles!`)
+
+    })
+
+    it('drive method increases odometer ', () => {
+      expect(batmobile.__proto__.drive).not.toBeUndefined();
+      batmobile.fill(20);
+      expect(batmobile.tank).toEqual(20);
+      batmobile.drive(20);
+      expect(batmobile.odometer).toEqual(20);
+    })
+
+    it('drive method decreases tank based on mpg', () => {
+      batmobile.fill(2);
+      batmobile.drive(25);
+
+      expect(batmobile.odometer).toEqual(25);
+      expect(batmobile.tank).toEqual(1);
+
+      expect(batmobile.drive(30)).toMatch(`I ran out of fuel at ${batmobile.odometer} miles!`)
+      expect(batmobile.odometer).toBeLessThan(55);
     })
   })
   
