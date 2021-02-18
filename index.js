@@ -116,10 +116,10 @@ Baby.prototype.play = function(){
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
-    1. 
-    2. 
-    3. 
-    4. 
+    1. Window/Global - when `this` is called outside of a function or code bloc, it is referring to the window or console.
+    2. Implicit - When `this` is followed by a method, it is implied that the object before the `this` is equal to `this`
+    3. New Binding - When an object is created or instanciated, `this` refers to that specific instance of the object
+    4. Explicit Binding - When using `call` or `apply` , `this` is called explicitly in the function 
   */
   
   
